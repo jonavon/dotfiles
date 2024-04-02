@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# This lets you quickly jump into a workspace directory
+#
+# Type:
+#
+#   w <tab>
+#
+# ... to autocomplete on all projects in the directories specified in the 
+# _w completion definition file
+
+cd "$WORKSPACE/$1"

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Cat file into clipboard
+#
+# Usage:
+# clip [file]
+#
+# or pipe stdin:
+# echo "foo" | clip
+cat $@ | xclip -sel clip

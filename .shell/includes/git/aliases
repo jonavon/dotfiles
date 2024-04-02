@@ -1,0 +1,9 @@
+# turn off autocorrect for git
+command -v nocorrect > /dev/null 2>&1 && alias git="nocorrect git"
+
+alias g="git"
+alias gss="git status"
+alias gpsom="git push origin main"
+alias gplom="git pull origin main"
+alias theirs="git checkout --theirs"
+alias ours="git checkout --ours"

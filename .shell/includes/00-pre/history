@@ -1,0 +1,27 @@
+# history
+export HISTFILESIZE=10000
+export HISTSIZE=10000
+
+# history
+case $SHELL in
+  "bash")
+    shopt -s histappend
+    shopt -s cmdhist
+    export HISTCONTROL=ignoredups:ignoreboth:ignorespace
+    export HISTIGNORE="ls:history"
+    HIST_BLUE="\033[0;34m"
+    HIST_NOCOLOR="\033[0m"
+    export HISTTIMEFORMAT=`echo -e ${HIST_BLUE}[%F %T] ${HIST_NOCOLOR} `
+    ;;
+  "zsh")
+    HISTFILE=$HOME/.zsh_history
+    SAVEHIST=10000
+    setopt APPEND_HISTORY # adds history
+    setopt SHARE_HISTORY # share history between sessions
+    setopt INC_APPEND_HISTORY SHARE_HISTORY # incrementally append history and share across sessions
+    setopt HIST_IGNORE_ALL_DUPS # don't record duplicates
+    setopt HIST_REDUCE_BLANKS
+    setopt HIST_VERIFY
+    setopt EXTENDED_HISTORY # add timestamp to history
+    ;;
+esac

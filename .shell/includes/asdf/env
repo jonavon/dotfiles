@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Load .asdf
+if [[ -e "$HOME/.asdf/asdf.sh" ]]; then
+  . $HOME/.asdf/asdf.sh
+fi
+
+# asdf completions
+if [[ "$SHELL" = "zsh" ]]; then
+  fpath=(${HOME}/.asdf/completions $fpath)
+fi

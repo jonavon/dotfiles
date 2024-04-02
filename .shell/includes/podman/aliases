@@ -1,0 +1,1 @@
+[ -e $HOME/.podman_is_docker ] && alias docker="podman"

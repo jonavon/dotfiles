@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# usage: git-fix-author [old_email] [new_name] [new_email]
+git-fix-author() {
+  OLD_EMAIL=$1
+  NEW_NAME=$2
+  NEW_EMAIL=$3
+
+  git filter-branch --commit-filter '
+  if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]; then
+    export GIT_AUTHOR_NAME="$NEW_NAME"
+    export GIT_AUTHOR_EMAIL=$NEW_EMAIL
+    export GIT_COMMITTER_NAME="$NEW_NAME"
+    export GIT_COMMITTER_EMAIL=$NEW_EMAIL
+  fi
+  git commit-tree "$@"'
+}

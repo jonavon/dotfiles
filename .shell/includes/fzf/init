@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Load fzf
+if [[ -n "$ZSH_NAME" ]]; then
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+else
+  [ -f ~/.fzf.sh ] && source ~/.fzf.sh
+fi

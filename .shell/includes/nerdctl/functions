@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# docker aliased to nerdctl
+nerdctl-is-docker() {
+  rm -f $HOME/.podman-is-docker
+  touch $HOME/.nerdctl-is-docker
+  alias docker="nerdctl"
+}
+
+# Stop all containers
+nstopall() { nerdctl stop $* $(nerdctl ps -q -a); }
+
+# Remove all containers
+nrmall() { nerdctl rm $* $(nerdctl ps -q -a); }
+
+# Remove all images
+nrmiall() { nerdctl rmi $* $(nerdctl images -q); }
+
+# Cleanup 
+nclean() { 
+  nerdctl rm $(nerdctl ps -q -a)
+  nerdctl volume rm $(nerdctl volume ls -q)
+}
+
+# Reclaim everything
+nprune() { 
+  # containers
+  nerdctl rm -f $(nerdctl ps -q -a)
+
+  # images
+  nerdctl rmi $(nerdctl images -q)
+
+  # volumes
+  nerdctl volume rm -f $(nerdctl volume ls -q)
+}
+
+# Shell login to container
+nsh() { nerdctl exec -i -t $1 /bin/bash; }
