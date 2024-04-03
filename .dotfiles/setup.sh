@@ -46,7 +46,6 @@ else
 
 	dotfiles config --local alias.config "config --local"
 
-
 	# Add the alias to the bashrc file
 	echo "alias dotfiles='/usr/bin/git --git-dir=\$HOME/.cfg/ --work-tree=\$HOME'" >> $HOME/.bashrc
 
