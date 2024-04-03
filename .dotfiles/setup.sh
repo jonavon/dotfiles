@@ -28,6 +28,14 @@ else
 	# Set local Git configuration to not show untracked files
 	config config --local status.showUntrackedFiles no
 
+	config config --local clean.requireForce true
+
+	config config --local alias.clean '!echo "Clean is disabled for dotfile configuration"'
+
+	config config --local alias.config "config --local"
+
+
+
 	# Add the alias to the bashrc file
 	echo "alias config='/usr/bin/git --git-dir=\$HOME/.cfg/ --work-tree=\$HOME'" >> $HOME/.bashrc
 
@@ -36,8 +44,8 @@ else
 fi
 
 # Create a backup directory and move existing files
-mkdir -pv $HOME/.dofiles/backup
-config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} $HOME/.dofiles/backup/{}
+mkdir -pv $HOME/.dotfiles/backup
+config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} $HOME/.dotfiles/backup/{}
 
 # Checkout the dotfiles repository
 config checkout
