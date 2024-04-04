@@ -60,7 +60,8 @@ else
 	# Create a new branch
 	read -t 5 -p "What branchname do you want to use [${HOME##*/}]?" branch
 	
-	dotfiles checkout HEAD -b $branch
+	dotfiles checkout HEAD -b ${branch:=${HOME##*/}}
+	
 fi
 
 # Ignore sensitive files and directories in .cfg/info/exclude
@@ -70,7 +71,6 @@ fi
 if ! grep -q "/.ssh" "$HOME/.cfg/info/exclude"; then
 	echo "/.ssh" >> $HOME/.cfg/info/exclude
 fi
-
 if ! grep -q "/.dotfiles/backup" "$HOME/.cfg/info/exclude"; then
 	echo "/.dotfiles/backup" >> $HOME/.cfg/info/exclude
 fi
