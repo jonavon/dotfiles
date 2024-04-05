@@ -139,8 +139,8 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 Let's backup what is about to be replaced. First we will create our backup directory and mirror what will be replace into that directory.
 
 ```
-DOTFILES_BRANCH="smurfpapa" # match your branch name
-$DOTFILES_BACKUP="$HOME/.dotfiles/backup/$DOTFILES_BRANCH"
+export DOTFILES_BRANCH="smurfpapa" # match your branch name
+export DOTFILES_BACKUP="$HOME/.dotfiles/backup/$DOTFILES_BRANCH"
 
 mkdir -pv $DOTFILES_BACKUP
 dotfiles ls-tree -r --name-only $DOTFILES_BRANCH | rsync -aivcP --files-from=- $HOME $DOTFILES_BACKUP/
