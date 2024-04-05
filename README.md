@@ -134,7 +134,7 @@ git clone --bare git@git@github.com:smurfpapa/dotfiles.git $HOME/.cfg
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 ```
 
-#### Backup current directory
+### Backup current directory
 
 Let's backup what is about to be replaced. First we will create our backup directory and mirror what will be replace into that directory.
 
@@ -148,6 +148,13 @@ dotfiles ls-tree -r --name-only $DOTFILES_BRANCH | rsync -aivcP --files-from=- $
 
 This does not delete the files currently in your directory.
 
+### Archive your dotfiles
+
+Archive your dotfiles for transport
+
+```
+dotfiles archive --format=tar.gz -o dotfiles.tar.gz --prefix=$(dotfiles rev-parse --abbrev-ref HEAD)/ HEAD
+```
 
 ### Pull
 
