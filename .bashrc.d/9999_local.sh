@@ -41,7 +41,7 @@ alias top='top -c'
 alias who='command who -ar -pld'
 alias wtf='watch -n 1 w -hs'
 # dotfiles https://www.atlassian.com/git/tutorials/dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 
 
