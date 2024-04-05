@@ -52,6 +52,9 @@ alias wtf='watch -n 1 w -hs'
 #
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+# Add bash completion for dotfiles
+complete -o bashdefault -o default -o nospace -F __git_wrap__git_main dotfiles
+
 #
 # vim:filetype=sh
 
