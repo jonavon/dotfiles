@@ -108,3 +108,74 @@ echo "/.gnupg" >> $HOME/.cfg/info/exclude
 echo "/.ssh" >> $HOME/.cfg/info/exclude
 ```
 
+## Usage
+
+When you are setup, you can then use your `dotfiles` alias to manage your configuration like a git repository. It is recommended that you be intentional about what you add.
+
+```
+dotfiles add .bashrc .bash_profile
+dotfiles commit -m "Add bash configuration"
+```
+
+### Push
+
+To push your local commits to a remote repository
+
+```
+dotfiles push
+```
+
+### Set up on a new machine
+
+If you are past the stage of setting up on a previous machine and you already have a repository just create the same setup here.
+
+```
+git clone --bare git@git@github.com:smurfpapa/dotfiles.git $HOME/.cfg
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+```
+
+#### Backup current directory
+
+Let's backup what is about to be replaced. First we will create our backup directory and mirror what will be replace into that directory.
+
+```
+DOTFILES_BRANCH="smurfpapa" # match your branch name
+$DOTFILES_BACKUP="$HOME/.dotfiles/backup/$DOTFILES_BRANCH"
+
+mkdir -pv $DOTFILES_BACKUP
+dotfiles ls-tree -r --name-only $DOTFILES_BRANCH | rsync -aivcP --files-from=- $HOME $DOTFILES_BACKUP/
+```
+
+This does not delete the files currently in your directory.
+
+
+### Pull
+
+When you ready sync your changes, just pull them together.
+
+```
+dotfiles pull
+```
+
+### Branching
+
+When you want to have separate configurations you can create a branch
+
+```
+dotfiles branch fancy
+dotfiles checkout fancy
+```
+
+### Getting Help
+
+The `dotfiles` alias is just git so you can get help for any command using
+`git` or the alias
+
+```
+dotfiles help <comand>
+```
+
+********
+
+These are just a few examples of how the `dotfiles` alias can be used. Feel
+free to fork and contribute.
