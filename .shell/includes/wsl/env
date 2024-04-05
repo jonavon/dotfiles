@@ -1,8 +1,0 @@
-#!/bin/sh
-
-uname -a | grep microsoft > /dev/null && export WSL=1
-
-if [[ $WSL -eq 1 ]]; then
-  export MSUSER=${MSUSER:-kb9zz}
-  export MSHOME=${MSHOME:-/mnt/c/Users/$MSUSER}
-fi

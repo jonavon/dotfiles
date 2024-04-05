@@ -1,1 +1,0 @@
-[ -e $HOME/.nerd_is_docker ] && alias docker="nerdctl"

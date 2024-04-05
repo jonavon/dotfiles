@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# docker aliased to podman
-podman-is-docker() {
-  rm -f $HOME/.nerdctl-is-docker
-  touch $HOME/.podman-is-docker
-  alias docker="podman"
-}

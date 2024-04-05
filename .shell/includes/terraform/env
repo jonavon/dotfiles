@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# autocomplete
-TERRAFORM=$(command -v terraform 2> /dev/null)
-if [ -n "$TERRAFORM" ] && [ -n "$ZSH_NAME" ]; then
-  autoload -U +X bashcompinit && bashcompinit
-  complete -o nospace -C "$TERRAFORM" terraform
-fi

@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Check if is wsl
-uname -r | grep microsoft > /dev/null && WSL=1
-
-if [[ $WSL -eq 1 ]]; then
-  alias C\:="cd /mnt/c"
-  alias c\:="cd /mnt/c"
-fi

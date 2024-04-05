@@ -4,33 +4,15 @@
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
-#
-# Get the profile
-if [ -f $HOME/.bash_profile ]; then
-         . ~/.bash_profile
-fi
-
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-	source /usr/share/bash-completion/bash_completion
-fi
-
-# User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-fi
-export PATH
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
+#
 
 # User specific aliases and functions
-if [ -d ~/.bashrc.d ]; then
-	for rc in ~/.bashrc.d/*; do
-		if [ -f "$rc" ]; then
-			. "$rc"
-		fi
-	done
-fi
 
-unset rc
+BASH_INCLUDES="${HOME}/.bashrc.d/includes"
+
+while read -r file; do
+	source "$file"
+done < <(find ${BASH_INCLUDES} -type f -exec grep -I -q . \{\} \; -print)

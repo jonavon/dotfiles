@@ -1,0 +1,28 @@
+PAGER="/usr/bin/vim -M -"
+
+EDITOR="/usr/bin/vim"
+
+CDPATH="${CDPATH}:.:..:../..:${HOME}:${HOME}/projects"
+
+PATH="${HOME}/.local/bin:${PATH}"
+
+export CDPATH EDITOR PAGER PATH
+
+#history
+
+HISTFILESIZE=10000
+HISTSIZE=10000
+HISTCONTROL=ignoredups:ignoreboth:ignorerespace
+HISTIGNORE="ls:history"
+HIST_BLUE="\033[0;34m"
+HIST_NOCOLOR="\033[0m"
+HISTTIMEFORMAT=`echo -e ${HIST_BLUE}[%F %T] ${HIST_NOCOLOR} `
+
+shopt -s histappend
+shopt -s cmdhist
+
+export HISTFILESIZE HISTSIZE HISTCONTROL HISTIGNORE HISTTIMEFORMAT
+
+
+
+# vim: filetype=sh

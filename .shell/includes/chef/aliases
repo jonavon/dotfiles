@@ -1,4 +1,0 @@
-# disable autocorrect
-alias knife="nocorrect knife"
-alias chef="nocorrect chef"
-alias kitchen="nocorrect kitchen"
