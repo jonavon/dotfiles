@@ -69,47 +69,6 @@ which() {
 	/usr/bin/which $@ || type $@;
 }
 
-#
-# Set the terminal title
-#
-set_term_title(){
-   echo -en "\033]0;$1\a"
-}
-
-GIT_SHARE_DIR=/usr/share/doc/git-2.40.1
-
-if [ -f ${GIT_SHARE_DIR}/contrib/completion/git-completion.bash ]; then
-	source ${GIT_SHARE_DIR}/contrib/completion/git-completion.bash
-fi
-
-if [ -f ${GIT_SHARE_DIR}/contrib/completion/git-prompt.sh ]; then
-	source ${GIT_SHARE_DIR}/contrib/completion/git-prompt.sh
-fi
-
-git_terminal_title() {
-	[[ $(__gitdir) == ".git" ]] && is_git=$PWD || is_git=$(dirname $(__gitdir) 2>/dev/null);
-	is_hg=`hg root 2>/dev/null`;
-	[[ $is_git ]] && is_scm_dir=$is_git || is_scm_dir=$is_hg;
-	if [[ $is_scm_dir ]]; then
-		set_term_title $(basename $is_scm_dir )
-	else
-		set_term_title $(basename $PWD)
-	fi
-}
-
-parse_branch() {
-	hg_root=`hg root 2>/dev/null`
-	if [[ "$hg_root" ]]; then
-		branch=`hg branch 2> /dev/null`
-		[[ -f $hg_root/.hg/bookmarks.current ]] && bookmark=`cat "$hg_root/.hg/bookmarks.current"`
-		if [[ "$bookmark" ]]; then
-			bookmark=":$bookmark";
-		fi
-		echo "($branch$bookmark)";
-	fi
-	__git_ps1 "(%s)";
-	# use the second line instead if you have bash autocompletion for git enabled
-}
 
 # Cat a file and simultaneously copy its contents into the
 # clipboard
