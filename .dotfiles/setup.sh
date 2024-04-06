@@ -41,6 +41,8 @@ else
 
 	dotfiles config --local alias.clean '!echo "Clean is disabled for dotfile configuration"'
 
+	dotfiles config --local alias.rm 'rm --cached'
+
 	# Set sparse checkout
 	dotfiles config --local core.sparseCheckout true
 

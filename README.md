@@ -67,6 +67,7 @@ Use our new `dotfiles` alias to set a local configuration.
 dotfiles config --local status.showUntrackedFiles no
 dotfiles config --local clean.requireForce true
 dotfiles config --local alias.clean '!echo "Clean is disabled for dotfile configuration"'
+dotfiles config --local alias.rm 'rm --cached'
 
 # Set sparse checkout (experimental)
 dotfiles config --local core.sparseCheckout true
