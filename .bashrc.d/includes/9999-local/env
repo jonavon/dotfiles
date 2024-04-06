@@ -1,5 +1,3 @@
-PAGER="/usr/bin/vim -M -"
-
 EDITOR="/usr/bin/vim"
 
 CDPATH="${CDPATH}:.:..:../..:${HOME}:${HOME}/projects"
