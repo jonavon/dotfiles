@@ -5,8 +5,8 @@ Post](https://www.atlassian.com/git/tutorials/dotfiles).
 
 This repository has a few differences.
 
-* The `config` alias has been replaced with `dotfiles` alias to avoid an alias
-  name collision.
+* The `config` alias has been replaced with a `dotfiles` alias to avoid an
+  alias name collision.
 * The main branch is effectively an empty branch containing this README.md and
   a setup script, `.dotfiles/setup.sh`.
 * Some git commands are disabled to prevent users from deleting their home
@@ -14,12 +14,12 @@ This repository has a few differences.
 
 ## Getting setup
 
-Users should be able to just run the setup script to get start. You accept the
-risk if you don't understand what's happening.
+Users should be able to just run the setup script to get started. You accept
+the risk if you don't understand what's happening.
 
 ### Manual steps
 
-To understand the setup you can follow this guide.
+To understand the setup script you can follow the guide in this README.
 
 #### 1. Configure git globally
 
@@ -56,6 +56,16 @@ repository.
 ```
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 echo "alias dotfiles='/usr/bin/git --git-dir=\$HOME/.cfg/ --work-tree=\$HOME'" >> $HOME/.bashrc
+```
+
+The commands above add the alias to your `.bashrc` file. When you setup your
+user branch you may want to put this alias somewhere else. Additionally, the
+alias is effectively a `git` command. To further help with management map this
+alias to git's bash completion.
+
+
+```
+$(complete -p git | rev | cut -d' ' -f 2- | rev) dotfiles
 ```
 
 #### 4. Set local configuration
