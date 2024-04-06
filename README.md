@@ -131,7 +131,7 @@ dotfiles push
 If you are past the stage of setting up on a previous machine and you already have a repository just create the same setup here.
 
 ```
-git clone --bare git@git@github.com:smurfpapa/dotfiles.git $HOME/.cfg
+git clone --bare git@github.com:smurfpapa/dotfiles.git $HOME/.cfg
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 ```
 
