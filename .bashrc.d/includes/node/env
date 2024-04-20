@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# fnm
+export PATH="/home/jonavon/.local/share/fnm:$PATH"
+eval "`fnm env`"
+
+
+# vim: filetype=sh
