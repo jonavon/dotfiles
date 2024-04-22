@@ -52,7 +52,7 @@ highlight SpecialKey term=bold ctermfg=244 ctermbg=236 guifg=#808080 guibg=#3434
 highlight NonText term=bold ctermfg=256 ctermbg=256 guifg=#202020 guibg=#202020
 highlight CursorLine term=underline cterm=none ctermbg=236 guibg=#444444
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Persistant Backup, Undo
+" => Persistent Backup, Undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set history=1000
 set viminfo=%,<1000,'20,"50,/100,H,f20,n~/vimfiles/_viminfo
@@ -128,7 +128,6 @@ Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'ervandew/supertab'
 Plugin 'puremourning/vimspector'
 Plugin 'kana/vim-bundle'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'matchit.zip'
 Plugin 'mattn/emmet-vim'
 Plugin 'mhinz/vim-startify'
@@ -172,6 +171,18 @@ let g:table_mode_corner= '|'
 "let g:table_mode_corner_corner ='+'
 "let g:table_mode_header_fillchar ='='
 
+"""""""""""""""""""""""""""""""""""""""""""""
+" => Vimspector
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:vimspector_base_dir=expand( '$HOME/.vim/settings/debugger' )
+let g:vimspector_enable_mappings='HUMAN'
+" mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -184,6 +195,9 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Save files as sudo
 cmap w!! w !sudo tee > /dev/null %
@@ -191,6 +205,7 @@ cmap w!! w !sudo tee > /dev/null %
 " disable insert paste
 set clipboard+=unnamed
 nnoremap p p`]<Esc>
+
 
 
 " vim: set ft=vim :
