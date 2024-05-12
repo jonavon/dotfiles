@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+ANDROID_HOME="${ANDROID_HOME:-${HOME}/.local/share/Android/Sdk}"
+ANDROID_USER_HOME="${ANDROID_USER_HOME:-${HOME}/.android}"
+ANDROID_VERBOSE="${ANDROID_VERBOSE:-'socket,radio'}"
+
+# vim: filetype=sh

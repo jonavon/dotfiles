@@ -1,0 +1,97 @@
+
+#
+# Returns the working directory of a git or mercurial repository
+set_gvim_servername() {
+	SVRNAME=$(basename `git rev-parse --show-toplevel 2> /dev/null` 2> /dev/null)
+	if [ -z $SVRNAME ]
+	then
+		SVRNAME=$(basename `hg root 2> /dev/null` 2> /dev/null)
+	fi
+	if [ -z $SVRNAME ]
+	then
+		SVRNAME=${PWD##*/}
+	fi
+	echo $SVRNAME;
+}
+
+# This shell function grabs the weather forecast for the next 24 to 48 hours 
+# from weatherunderground.com. Replace <YOURZIPORLOCATION> with your zip code
+# or your "city, state" or "city, country", then calling the function without
+# any arguments returns the weather for that location. Calling the function
+# with a zip code or place name as an argument returns the weather for that
+# location Instead of your default.
+# see: http://www.reddit.com/r/bashtricks/comments/b1j5y/get_the_weather_forecast_for_the_next_24_to_48/
+weather(){
+         curl -s "http://api.wunderground.com/auto/wui/geo/ForecastXML/index.xml?query=${@:-<YOURZIPORLOCATION>}"|perl -ne '/<title>([^<]+)/&&printf "%s: ",$1;/<fcttext>([^<]+)/&&print $1,"\n"';
+}
+
+# map() function
+# The map function should be familiar to anyone that's had any experience with
+# functional programming languages. This map function takes a command with any
+# number of arguments and applies it to each item in a list. It's basically a
+# shorthand way of writing a for loop.
+# see: http://www.reddit.com/r/bashtricks/comments/aks3u/a_functional_programming_style_map_function_for/
+#
+# Syntax
+# ------
+# The syntax is map COMMAND: ITEM1 ITEM2 ITEM3 ...
+# The space following the colon is required. Space preceding it is optional.
+map(){
+    local command
+    if [ $# -lt 2 ] || [[ ! "$@" =~ :[[:space:]] ]];then
+        echo "Invalid syntax." >&2; return 1
+    fi
+    until [[ $1 =~ : ]]; do
+        command="$command $1"; shift
+    done
+    command="$command ${1%:}"; shift
+    for i in "$@"; do
+        eval "${command//\\/\\\\} \"${i//\\/\\\\}\""
+    done
+}   
+
+# calc() function
+# Syntax
+# ------
+# calc 10+2*3
+calc() { echo "scale=100; $*" | bc -l; }
+
+
+# which()
+# Usage
+# -----
+# use type if it is a function
+# which arg
+
+unalias which 2>/dev/null
+
+which() {
+	/usr/bin/which $@ || type $@;
+}
+
+
+# Cat a file and simultaneously copy its contents into the
+# clipboard
+#
+# usage:
+# clipcat [file]
+#
+# or pipe stdin:
+# echo "foo" | clipcat
+clipcat() {
+	cat $@ | tee >(xclip -sel clip)	
+}
+
+
+#PS1='\[\033[G\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
+PS1="\$(parse_branch)$PS1"
+PS1="\A $PS1"
+
+PROMPT_COMMAND=git_terminal_title
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/home/jonavon/.gvm/bin/gvm-init.sh" ]] && source "/home/jonavon/.gvm/bin/gvm-init.sh"
+
+
+
+# vim: filetype=sh
