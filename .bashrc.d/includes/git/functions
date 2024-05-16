@@ -40,7 +40,7 @@ parse_branch() {
 		fi
 		echo " ($branch$bookmark)";
 	fi
-	__git_ps1 "(%s)";
+	__git_ps1 " (%s)";
 	# use the second line instead if you have bash autocompletion for git enabled
 }
 
