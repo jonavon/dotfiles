@@ -5,7 +5,6 @@ set_term_title(){
    echo -en "\033]0;$1\a"
 }
 
-PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 GIT_SHARE_DIR=/usr/local/src/git
 
 if [ -f ${GIT_SHARE_DIR}/contrib/completion/git-completion.bash ]; then
@@ -39,7 +38,7 @@ parse_branch() {
 		if [[ "$bookmark" ]]; then
 			bookmark=":$bookmark";
 		fi
-		echo "($branch$bookmark)";
+		echo " ($branch$bookmark)";
 	fi
 	__git_ps1 "(%s)";
 	# use the second line instead if you have bash autocompletion for git enabled
