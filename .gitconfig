@@ -16,6 +16,7 @@
 	ll = log --graph --decorate --pretty=oneline --abbrev-commit --all --stat -M
 	tree = ! git ls-tree --full-name --name-only -t -r HEAD | sed -e \"s/[^-][^\\/]*\\//   |/g\" -e \"s/|\\([^ ]\\)/|-- \\1/\"
 	disk-usage = rev-list --disk-usage=human --objects --all
+	ls = ls-files
 [push]
 	default = simple
 	autoSetupRemote = true
