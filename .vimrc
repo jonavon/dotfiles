@@ -3,6 +3,7 @@ set encoding=utf-8
 
 set guifont="Liberation Mono":h12:cANSI:qDRAFT
 
+let mapleader = "\\"
 map! ^? ^H
 
 inoremap <S-CR> <Esc>
@@ -145,6 +146,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'travisjeffery/vim-auto-mkdir'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'aquach/vim-http-client'
 if has('nvim') || version > 900
 	Plugin 'exafunction/codeium.vim'
 endif
