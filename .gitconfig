@@ -6,6 +6,7 @@
 	excludesfile = ~/.gitignore.global
 	preloadindex = true
 	fscache = true
+	longpaths = true
 [alias]
 	st = status
 	co = checkout
@@ -24,3 +25,7 @@
 	auto = 256
 [init]
 	defaultBranch = main
+[http]
+	postBuffer = 524288000
+[grep]
+	lineNumber = true
