@@ -148,7 +148,12 @@ Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'aquach/vim-http-client'
 if has('nvim') || version > 900
+	Plugin 'neovim/nvim-lspconfig'
 	Plugin 'exafunction/codeium.vim'
+	Plugin 'mfussenegger/nvim-dap'
+	Plugin 'rcarriga/nvim-dap-ui'
+	Plugin 'leoluz/nvim-dap-go'
+	Plugin 'rcarriga/nvim-notify'
 endif
 
 " All of your Plugins must be added before the following line
@@ -208,6 +213,15 @@ cmap w!! w !sudo tee > /dev/null %
 set clipboard+=unnamed
 nnoremap p p`]<Esc>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NVIM LSP
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+lua << EOF
+	require('lspconfig').pylsp.setup{}
+	require'lspconfig'.eslint.setup{}
+EOF
+endif
 
 
 " vim: set ft=vim :
