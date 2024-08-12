@@ -209,13 +209,9 @@ map <leader>s? z=
 " Save files as sudo
 cmap w!! w !sudo tee > /dev/null %
 
-" disable insert paste
-set clipboard+=unnamed
-nnoremap p p`]<Esc>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => NVIM LSP
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" => NVIM LSP
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('nvim')
 lua << EOF
 	require('lspconfig').pylsp.setup{}
