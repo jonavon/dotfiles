@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
-export PATH="$PATH:$HOME/opt/flutter/bin"
+export PATH="$PATH:$HOME/opt/flutter/bin:$HOME/.pub-cache/bin"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[ -f /home/jonavon/.dart-cli-completion/bash-config.bash ] && . /home/jonavon/.dart-cli-completion/bash-config.bash || true
+## [/Completion]
 
 # vim: filteype=sh
