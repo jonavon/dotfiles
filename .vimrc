@@ -148,7 +148,6 @@ Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'aquach/vim-http-client'
 if has('nvim') || version > 900
-	Plugin 'neovim/nvim-lspconfig'
 	Plugin 'exafunction/codeium.vim'
 	Plugin 'mfussenegger/nvim-dap'
 	Plugin 'rcarriga/nvim-dap-ui'
@@ -208,16 +207,6 @@ map <leader>s? z=
 
 " Save files as sudo
 cmap w!! w !sudo tee > /dev/null %
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" => NVIM LSP
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has('nvim')
-lua << EOF
-	require('lspconfig').pylsp.setup{}
-	require'lspconfig'.eslint.setup{}
-EOF
-endif
 
 
 " vim: set ft=vim :
