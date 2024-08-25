@@ -18,6 +18,9 @@
 	tree = ! git ls-tree --full-name --name-only -t -r HEAD | sed -e \"s/[^-][^\\/]*\\//   |/g\" -e \"s/|\\([^ ]\\)/|-- \\1/\"
 	disk-usage = rev-list --disk-usage=human --objects --all
 	ls = ls-files
+	hide = update-index --assume-unchanged
+	unhide = update-index --no-assume-unchanged
+	hidden = ! git ls-files -v | grep '^[a-z]' | cut -c 3-
 [push]
 	default = simple
 	autoSetupRemote = true
