@@ -82,7 +82,102 @@ clipcat() {
 	cat $@ | tee >(xclip -sel clip)	
 }
 
+# Download a video from a m3u8 playlist
+# usage:
+# m3u8
+# Enter m3u8 link:
+# <link>
+# Enter output filename:
+# <filename>
+# Enter video title:
+# <title>
+m3u8() {
+	local link filename title
 
+		# Function to print usage
+		print_usage() {
+			echo "Usage: m3u8 [OPTIONS]"
+			echo "Options:"
+			echo "  -l, --link <url>      M3U8 link (required if not interactive)"
+			echo "  -f, --filename <name> Output filename without extension (required if not interactive)"
+			echo "  -t, --title <title>   Video title (optional)"
+			echo "  -h, --help            Display this help message"
+			echo "If no options are provided, the function will run in interactive mode."
+		}
+
+		# Function to validate URL
+		validate_url() {
+			local url="$1"
+			if [[ $url =~ ^https?://[A-Za-z0-9.-]+(/[A-Za-z0-9_.-]+)*\.m3u8([?&][A-Za-z0-9_%&=.-]+)*$ ]]; then
+				return 0
+			else
+				return 1
+			fi
+		}
+
+		# Parse command-line options
+		while [[ $# -gt 0 ]]; do
+			case "$1" in
+				-l|--link)
+					link="$2"
+					shift 2
+					;;
+				-f|--filename)
+					filename="$2"
+					shift 2
+					;;
+				-t|--title)
+					title="$2"
+					shift 2
+					;;
+				-h|--help)
+					print_usage
+					return 0
+					;;
+				*)
+					echo "Unknown option: $1"
+					print_usage
+					return 1
+					;;
+			esac
+		done
+
+		# If link is not provided or invalid, prompt for it
+		while ! validate_url "$link"; do
+			read -p "Enter m3u8 link: " link
+			if ! validate_url "$link"; then
+				echo "Invalid m3u8 link. Please enter a valid URL ending with .m3u8 (query parameters allowed)"
+			fi
+		done
+
+		# If filename is not provided, prompt for it
+		while [[ -z $filename ]]; do
+			read -p "Enter output filename (without extension): " filename
+			if [[ ! $filename =~ ^[a-zA-Z0-9_-]+$ ]]; then
+				echo "Invalid filename. Please use only letters, numbers, underscores, and hyphens."
+				filename=""
+			fi
+		done
+
+		# If title is not provided, prompt for it (optional)
+		if [[ -z $title ]]; then
+			read -p "Enter video title (optional, press Enter to skip): " title
+		fi
+
+		# Check if ffmpeg is installed
+		if ! command -v ffmpeg &> /dev/null; then
+			echo "Error: ffmpeg is not installed. Please install it and try again."
+			return 1
+		fi
+
+		# Run ffmpeg command with error handling
+		if ffmpeg -i "$link" ${title:+-metadata title="$title"} -bsf:a aac_adtstoasc -vcodec copy -c copy -crf 50 "$filename.mp4"; then
+			echo "Download completed successfully. Output file: $filename.mp4"
+		else
+			echo "Error occurred during download. Please check the m3u8 link and try again."
+			return 1
+		fi
+	}
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/home/jonavon/.gvm/bin/gvm-init.sh" ]] && source "/home/jonavon/.gvm/bin/gvm-init.sh"
