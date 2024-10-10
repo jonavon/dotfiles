@@ -32,3 +32,7 @@
 	postBuffer = 524288000
 [grep]
 	lineNumber = true
+[diff]
+	tool = meld
+[difftool "meld"]
+	cmd = meld $LOCAL $REMOTE
