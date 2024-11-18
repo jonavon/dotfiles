@@ -143,12 +143,12 @@ m3u8() {
 		done
 
 		# If link is not provided or invalid, prompt for it
-		while ! validate_url "$link"; do
+		# while ! validate_url "$link"; do
 			read -p "Enter m3u8 link: " link
-			if ! validate_url "$link"; then
-				echo "Invalid m3u8 link. Please enter a valid URL ending with .m3u8 (query parameters allowed)"
-			fi
-		done
+			# if ! validate_url "$link"; then
+			# 	echo "Invalid m3u8 link. Please enter a valid URL ending with .m3u8 (query parameters allowed)"
+			# fi
+		# done
 
 		# If filename is not provided, prompt for it
 		while [[ -z $filename ]]; do
