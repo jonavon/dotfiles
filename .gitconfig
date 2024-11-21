@@ -21,6 +21,8 @@
 	hide = update-index --assume-unchanged
 	unhide = update-index --no-assume-unchanged
 	hidden = ! git ls-files -v | grep '^[a-z]' | cut -c 3-
+	list-untracked = !bash -c 'git fetch --prune && git branch -r | grep origin/ | cut -d/ -f2- | grep -v -f /dev/fd/0 <(git branch -vv --format='\\''%(refname:short) %(upstream:short)'\\'' | grep origin | awk '\\''{print $1}'\\'')'
+	shred = ! git list-untracked | xargs git branch -D
 [push]
 	default = simple
 	autoSetupRemote = true
