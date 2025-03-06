@@ -44,5 +44,38 @@ parse_branch() {
 	# use the second line instead if you have bash autocompletion for git enabled
 }
 
+# Bash completion for git pr alias
+# git config --global alias.pr '!f() {
+#  BRANCH="$1"
+#  WORKTREE_PATH="../pull-requests/${BRANCH}"
+#
+#  if [ "$#" -ge 2 ]; then
+#    WORKTREE_PATH="$2"
+#  fi
+#
+#  git fetch origin
+#  git worktree add "${WORKTREE_PATH}" "origin/${BRANCH}"
+# }; f'
+_git_pr_complete() {
+  local cur prev words cword
+  _init_completion || return
+
+  # If we're on the first argument, complete remote branches
+  if [ $cword -eq 2 ]; then
+    # Get list of remote branches, strip 'origin/' prefix
+    local branches=$(git branch -r | grep 'origin/' | grep -v HEAD | sed 's/origin\///')
+    COMPREPLY=($(compgen -W "$branches" -- "$cur"))
+    return 0
+  fi
+
+  # If we're on the second argument, complete directories
+  if [ $cword -eq 3 ]; then
+    _filedir -d
+    return 0
+  fi
+}
+
+# Register the completion function for git pr
+complete -F _git_pr_complete git pr
 
 # vim: filetype=sh
