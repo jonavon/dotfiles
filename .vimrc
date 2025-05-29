@@ -157,10 +157,6 @@ Plugin 'w0rp/ale'
 Plugin 'justinmk/vim-sneak'
 if has('nvim') || version > 900
 	Plugin 'exafunction/codeium.vim'
-	Plugin 'mfussenegger/nvim-dap'
-	Plugin 'rcarriga/nvim-dap-ui'
-	Plugin 'leoluz/nvim-dap-go'
-	Plugin 'rcarriga/nvim-notify'
 endif
 
 " All of your Plugins must be added before the following line
